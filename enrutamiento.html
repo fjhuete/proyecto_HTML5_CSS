@@ -1,0 +1,378 @@
+<!DOCTYPE HTML>
+<!--
+	Proyecto de HTML5 y CSS de la asignatura Lenguajes de Marcas.
+	A partir de la plantilla Hyperspace by HTML5 UP de @ajlkn en html5up.net
+	Licencia: Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Las prácticas de Javi - Lenguajes de Marcas</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Header -->
+		<header id="header">
+            <a href="index.html" class="title">Inicio</a>
+			<nav id="nav">
+                <ul>
+                    <li>
+                        <div class="dropdown">
+                            <a href="#">Asignaturas</a>
+                            <div class="dropdown-content">
+                            <a href="lenguajes_marcas.html">Lenguajes de Marca</a>
+                            <a href="bbdd.html">Bases de Datos</a>
+                            <a href="redes.html">Redes</a>
+                            <a href="iso.html">Sistemas Operativos</a>
+                            </div>
+                    </li>
+                    <li><a href="index.html/#contacto">Contacto</a></li>
+            </nav>
+        </header>
+
+		<!-- Wrapper -->
+        <div id="wrapper">
+
+            <!-- Main -->
+                <section id="main" class="wrapper">
+                    <div class="inner">
+                        <h1 class="major">Práctica de enrutamiento</h1>
+                        <ol>
+                            <h2><li>Configuración de la instantánea y la red en Openstack</li></h2>
+                            <p>Para configurar el acceso con usuario y contraseña, en primer lugar, se debe crear la contraseña tanto para el usuario debian como para el root:</p>
+                            <img src="images/enrutamiento1.png">
+                            <p>Adicionalmente se puede configurar también el acceso a través del protocolo SSH editando el fichero de configuración:</p>
+                            <img src="images/enrutamiento2.png">
+                            <p>Como último paso es necesario reiniciar el servicio SSH:</p>
+                            <img src="images/enrutamiento3.png">
+                            <p>Una vez que la máquina está configurada se puede crear la instantánea:</p>
+                            <div class="col-4"><span class="image fit"><img<img src="images/enrutamiento4.png"></span></div>
+                            <p>Posteriormente se puede utilizar el ID de la imagen en el fichero YAML para crear máquinas a las que se pueda acceder con usuario y contraseña y por SSH.</p>
+                            <div class="col-4"><span class="image fit"><img<img src="images/enrutamiento5.png"></span></div>
+                            <p>Para ello, desde el menú stacks de openstack se lanza un nuevo stack:</p>
+                            <img src="images/enrutamiento6.png">
+                            <p>Y para ello se usa el archivo YAML como plantilla:</p>
+                            <img src="images/enrutamiento7.png">
+                            <h2><li>Esquema gráfico de la configuración</li></h2>
+                            <img src="images/enrutamiento8.png">
+                            <h2><li>Comandos de configuración para cada nodo</li></h2>
+                                <ol>
+                                    <h3><li>PC1</li></h3>
+                                    <p>Puesto que sólo está conectado a un router por su única tarjeta de red, la tabla de enrutamiento de PC1 se puede simplificar hasta dejarla en una única línea.</p>
+                                    <div class="table-wrapper">
+										<table class="alt">
+                                            <thead>
+												<tr>
+													<th>Destino</th>
+													<th>Siguiente router</th>
+													<th>Interfaz de salida</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>PC2</td>
+													<td>R1: 172.23.1.8</td>
+													<td>ens3</td>
+												</tr>
+												<tr>
+													<td>PC3</td>
+													<td>R1: 172.23.1.8</td>
+													<td>ens3</td>
+												</tr>
+												<tr>
+													<td>PC4</td>
+													<td>R1: 172.23.1.8</td>
+													<td>ens3</td>
+												</tr>
+												<tr>
+													<td>0.0.0.0</td>
+													<td>R1: 172.23.1.8</td>
+													<td>ens3</td>
+												</tr>
+											</tfoot>
+                                        </table>
+                                    </div>
+                                    <p>Para trasladar esta tabla a la configuración del ordenador se puede usar el comando ip route:</p>
+                                    <img src="images/enrutamiento9.png">
+                                    <h3><li>PC2</li></h3>
+                                    <p>Puesto que sólo está conectado a un router por su única tarjeta de red, la tabla de enrutamiento de PC2 se puede simplificar hasta dejarla en una única línea.</p>
+                                    <div class="table-wrapper">
+										<table class="alt">
+                                            <thead>
+												<tr>
+													<th>Destino</th>
+													<th>Siguiente router</th>
+													<th>Interfaz de salida</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>PC1</td>
+													<td>R2: 172.25.2.255</td>
+													<td>ens3</td>
+												</tr>
+												<tr>
+													<td>PC3</td>
+													<td>R2: 172.25.2.255</td>
+													<td>ens3</td>
+												</tr>
+												<tr>
+													<td>PC4</td>
+													<td>R2: 172.25.2.255</td>
+													<td>ens3</td>
+												</tr>
+												<tr>
+													<td>0.0.0.0</td>
+													<td>R2: 172.25.2.255</td>
+													<td>ens3</td>
+												</tr>
+											</tfoot>
+                                        </table>
+                                    </div>
+                                    <p>Para trasladar esta tabla a la configuración del ordenador se puede usar el comando ip route:</p>
+                                    <img src="images/enrutamiento10.png">
+                                    <h3><li>PC3</li></h3>
+                                    <p>Puesto que sólo está conectado a un router por su única tarjeta de red, la tabla de enrutamiento de PC3 se puede simplificar hasta dejarla en una única línea.</p>
+                                    <div class="table-wrapper">
+										<table class="alt">
+                                            <thead>
+												<tr>
+													<th>Destino</th>
+													<th>Siguiente router</th>
+													<th>Interfaz de salida</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>PC1</td>
+													<td>R3: 172.27.1.204</td>
+													<td>ens3</td>
+												</tr>
+												<tr>
+													<td>PC2</td>
+													<td>R3: 172.27.1.204</td>
+													<td>ens3</td>
+												</tr>
+												<tr>
+													<td>PC4</td>
+													<td>R3: 172.27.1.204</td>
+													<td>ens3</td>
+												</tr>
+												<tr>
+													<td>0.0.0.0</td>
+													<td>R3: 172.27.1.204</td>
+													<td>ens3</td>
+												</tr>
+											</tfoot>
+                                        </table>
+                                    </div>
+                                    <p>Por el mismo motivo que en los casos anteriores, para PC3 tampoco es necesario trasladar esta tabla a la configuración de la máquina.</p>
+                                    <img src="images/enrutamiento11.png">
+                                    <h3><li>Router 1</li></h3>
+                                    <p>Este router sólo se conecta a un ordenador y otro router. Por tanto, su tabla de enrutamiento sólo necesitará dos entradas: la de la interfaz por la que se comunica con el ordenador al que está conectado y la de la interfaz por la que se comunica con el resto de la red a través del router 2.</p>
+                                    <div class="table-wrapper">
+										<table class="alt">
+                                            <thead>
+												<tr>
+													<th>Destino</th>
+													<th>Siguiente router</th>
+													<th>Interfaz de salida</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>R2</td>
+													<td>R2: 172.24.2.230</td>
+													<td>ens3</td>
+												</tr>
+												<tr>
+													<td>R3</td>
+													<td>R2: 172.24.2.230</td>
+													<td>ens3</td>
+												</tr>
+												<tr>
+													<td>PC1</td>
+													<td>R2: 172.24.2.230</td>
+													<td>ens3</td>
+												</tr>
+                                                <tr>
+													<td>PC2</td>
+													<td>R2: 172.24.2.230</td>
+													<td>ens3</td>
+												</tr>
+                                                <tr>
+													<td>PC3</td>
+													<td>R2: 172.24.2.230</td>
+													<td>ens3</td>
+												</tr>
+												<tr>
+													<td>0.0.0.0</td>
+													<td>R2: 172.24.2.230</td>
+													<td>ens3</td>
+												</tr>
+											</tfoot>
+                                        </table>
+                                    </div>
+                                    <p>Para trasladar esta tabla a la configuración de la máquina se puede usar el comando ip route:</p>
+                                    <img src="images/enrutamiento12.png">
+                                    <p>Además, se debe activar en este dispositivo el bit de forwarding, por ejemplo, modificando el fichero <code>/proc/sys/net/ipv4/ip_forward</code>:</p>
+                                    <img src="images/enrutamiento13.png">
+                                    <h3><li>Router 2</li></h3>
+                                    <p>El router 2 está conectado a un ordenador pero también a dos routers. Esto lo convierte en un dispositivo que deberá enrutar una gran cantidad de tráfico en la red y, además, hace que su tabla de enrutamiento sea algo más compleja que las del resto de dispositivos porque no se pueden simplificar tantas entradas.</p>
+                                    <div class="table-wrapper">
+										<table class="alt">
+                                            <thead>
+												<tr>
+													<th>Destino</th>
+													<th>Siguiente router</th>
+													<th>Interfaz de salida</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>R1</td>
+													<td>R1: 172.24.2.206</td>
+													<td>ens3</td>
+												</tr>
+												<tr>
+													<td>R3</td>
+													<td>R3: 172.26.2.36</td>
+													<td>ens5</td>
+												</tr>
+												<tr>
+													<td>PC1</td>
+													<td>R1: 172.24.2.206</td>
+													<td>ens3</td>
+												</tr>
+                                                <tr>
+													<td>PC2</td>
+													<td>172.25.2.142</td>
+													<td>ens4</td>
+												</tr>
+                                                <tr>
+													<td>PC3</td>
+													<td>R3: 172.26.2.36</td>
+													<td>ens5</td>
+												</tr>
+											</tfoot>
+                                        </table>
+                                    </div>
+                                    <p>Para trasladar esta tabla a la configuración de la máquina se puede usar el comando ip route:</p>
+                                    <img src="images/enrutamiento14.png">
+                                    <p>Además, se debe activar en este dispositivo el bit de forwarding, por ejemplo, modificando el fichero <code>/proc/sys/net/ipv4/ip_forward</code>:</p>
+                                    <img src="images/enrutamiento15.png">
+                                    <h3><li>Router 3</li></h3>
+                                    <p>Este router sólo se conecta a un ordenador y otro router. Por tanto, su tabla de enrutamiento sólo necesitará dos entradas: la de la interfaz por la que se comunica con el ordenador al que está conectado y la de la interfaz por la que se comunica con el resto de la red a través del router 2.</p>
+                                    <div class="table-wrapper">
+										<table class="alt">
+                                            <thead>
+												<tr>
+													<th>Destino</th>
+													<th>Siguiente router</th>
+													<th>Interfaz de salida</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>R1</td>
+													<td>R2: 172.26.0.146</td>
+													<td>ens3</td>
+												</tr>
+												<tr>
+													<td>R2</td>
+													<td>R2: 172.26.0.146</td>
+													<td>ens3</td>
+												</tr>
+												<tr>
+													<td>PC1</td>
+													<td>R2: 172.26.0.146</td>
+													<td>ens3</td>
+												</tr>
+                                                <tr>
+													<td>PC2</td>
+													<td>R2: 172.26.0.146</td>
+													<td>ens3</td>
+												</tr>
+                                                <tr>
+													<td>PC3</td>
+													<td>172.27.2.126</td>
+													<td>ens4</td>
+												</tr>
+                                                <tr>
+													<td>0.0.0.0</td>
+													<td>R2: 172.26.0.146</td>
+													<td>ens3</td>
+												</tr>
+											</tfoot>
+                                        </table>
+                                    </div>
+                                    <p>Puesto que ya hay conectividad entre PC3 y el router 3, para trasladar esta tabla a la configuración de la máquina se puede usar el comando ip route y, a continuación, se debe activar en este dispositivo el bit de forwarding, por ejemplo, modificando el fichero <code>/proc/sys/net/ipv4/ip_forward:</code></p>
+                                    <img src="images/enrutamiento16.png">
+                                    <br>
+                                    <img src="images/enrutamiento17.png">
+                                    <h3><li>Conexión entre las máquinas</li></h3>
+                                    <p>Una vez que se ha configurado el escenario de acuerdo a la descripción previamente expuesta, todas las máquinas que lo conforman pueden comunicarse entre sí.</p>
+                                        <ol>
+                                            <h4><li>PC1</li></h4>
+                                                <h5>Con PC2:</h5>
+                                                <img src="images/enrutamiento18.png">
+                                                <h5>Con PC3:</h5>
+                                                <img src="images/enrutamiento19.png">
+                                            <h4><li>PC2</li></h4>
+                                                <h5>Con PC1:</h5>
+                                                <img src="images/enrutamiento20.png">
+                                                <h5>Con PC3:</h5>
+                                                <img src="images/enrutamiento21.png">
+                                            <h4><li>PC3</li></h4>
+                                                <h5>Con PC1:</h5>
+                                                <img src="images/enrutamiento22.png">
+                                                <h5>Con PC2:</h5>
+                                                <img src="images/enrutamiento23.png">
+                                        </ol>
+                                </ol>
+                            <h2><li>Captura del tráfico entre PC1 y PC2 en Router 2</li></h2>
+                            <ol>
+                                <h3><li>Captura con <code>tcpdump</code></li></h3>
+                                <p>Con el comando <code>tcpdump</code>, la opción <code>-vvv</code> que aporta la mayor cantidad de información posible y el argumento <code>host 172.23.1.187 and 172.27.1.204</code> se puede filtrar el tráfico que circula por la red entre PC1 y PC3 en cualquiera de los dos routers por los que pasa: el router 2 o el router 3.</p>
+                                <p>En el caso de la siguiente imagen, el tráfico que se ha capturado en el router 2.</p>
+                                <p>La captura se produce en un momento en el que la red ya estaba totalmente configurada y en el que se había estado trabajando en el enrutamiento de los diferentes dispositivos de la red recientemente. Esto hace que en la captura de tráfico que se muestra no aparezcan paquetes que usan el protocolo ARP para descubrir las direcciones IP de los dispositivos vecinos puesto que las tablas de memoria ARP tienen esa información almacenada.</p>
+                                <img src="images/enrutamiento24.png">
+                                <p>Por tanto, en la captura de tráfico se recogen 18 paquetes que han pasado por la tarjeta de red del router 2 que se ha usado para realizarla. En ella, se alternan las líneas tanto de petición como de respuesta de un ping que se ha enviado desde el PC1 al PC3. En cada una de estas líneas se incluye, en primer lugar, un código de tiempo con la hora a la que se ha capturado el paquete. A continuación, se muestra una serie de datos relevantes para el análisis del tráfico capturado. Algunos de ellos tienen una relevancia mayor que otros. Por ejemplo, se muestra el ttl de cada paquete o el protocolo que se está usando, en este caso ICMP (ping).</p>
+                                <p>Posteriormente se muestra la IP de origen y destino de cada uno de los paquetes capturados. En el caso de las peticiones, el origen es la IP del PC1 (172.23.1.187) y el destino es la IP del PC3 (172.27.1.204). En las líneas que se corresponden con los paquetes de respuesta del ping, el orden de las direcciones IP es el inverso puesto que el origen de estos mensajes es el PC3 y su destino el PC1. Posteriormente, la captura especifica el tipo de paquete del que se trata, bien ICMP echo request si es el ping que envía el PC1 al PC3 o bien ICMP echo reply si es la respuesta de ping que el PC3 devuelve al PC1. También se muestra el número de secuencia de cada paquete dentro del ping, así como la longitud del paquete: 64 bits.</p>
+                            </ol>
+                        </ol>
+                        <hr />
+                        <p>Si te ha gustado esta práctica puedes descargarla, guardarla o hacer una aportación.</p>
+                        <ul class="actions">
+                            <li><a href="#" class="button primary icon solid fa-download">Descargar</a></li>
+                            <li><a href="#" class="button icon solid fa-save">Guardar</a></li>
+                            <li><a href="formulario.html" class="button icon solid fa-upload">Enviar una aportación</a></li>
+                        </ul>
+                    </div>
+                </section>
+        </div>
+        
+        <!-- Footer -->
+        <footer id="footer" class="wrapper style1-alt">
+            <div class="inner">
+                <ul class="menu">
+                    <li> Este trabajo está licenciado bajo <a href="http://creativecommons.org/licenses/by-nc/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"></a></li> <li>Proyecto de Francisco Javier Huete basado en una plantilla de <a href="http://html5up.net">HTML5 UP</a></li>
+                </ul>
+            </div>
+        </footer>
+
+    <!-- Scripts -->
+        <script src="assets/js/jquery.min.js"></script>
+        <script src="assets/js/jquery.scrollex.min.js"></script>
+        <script src="assets/js/jquery.scrolly.min.js"></script>
+        <script src="assets/js/jquery.dropotron.min.js"></script>
+        <script src="assets/js/browser.min.js"></script>
+        <script src="assets/js/breakpoints.min.js"></script>
+        <script src="assets/js/util.js"></script>
+        <script src="assets/js/main.js"></script>
+
+    </body>
+</html>
