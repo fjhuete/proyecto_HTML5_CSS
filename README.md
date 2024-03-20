@@ -8,7 +8,7 @@ El proyecto consiste en realizar una web de temática libre.
 3. Modifica el HTML y el CSS de la plantilla para que se adapte a lo que necesitas.
 4. Una vez concluida la página web, debes darte de alta en un servicio de hosting gratuito y subir la página a dicho hosting.
 
-## Características que debe tener el sitio web realizadoPermalink
+## Características que debe tener el sitio web realizado
 
 1. La página debe tener al menos 4 páginas webs enlazadas entre si.
 2. La página debe estar hecha en HTML5 y todas las páginas deberán ser válidas.
